@@ -2,16 +2,17 @@
 from django.urls import path
 from django.conf.urls import url
 
-from Images.views import ImagesListView
-from . import views;
+#from templates import ImagesListView
+from . import templates;
 from django.views.generic import (CreateView,DetailView,ListView)
-from .views import *
+from .templates import *
+from . import views;
 
 app_name='images'
 
 urlpatterns = [
 
-    #path('', views.article_list,name="list"),
-    path('',ImagesListView),
+    path('',views.ImagesListView,name="list"),
+    path('create',views.ImageCreate,name="create"),
 
 ]

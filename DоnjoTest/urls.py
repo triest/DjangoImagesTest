@@ -18,7 +18,7 @@ from django.urls import path
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url,include
-#from . import views;
+#from . import templates;
 
 urlpatterns = [
     path('admin/', admin.site.urls),
