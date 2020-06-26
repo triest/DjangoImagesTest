@@ -8,7 +8,7 @@
  <div class="create-article">
         <h2>Create Image</h2>
     </div>
-    <form  action="{% url 'images:create'%}" method="post">
+    <form  action="{% url 'images:create'%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{form}}
         <input type="submit" value="Save Image">

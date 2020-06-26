@@ -14,5 +14,8 @@ urlpatterns = [
 
     path('',views.ImagesListView,name="list"),
     path('create',views.ImageCreate,name="create"),
+    path('create',views.ImageCreate,name="create"),
+    path('<pk>',views.DetailView,name="detail"),
 
 ]
+
