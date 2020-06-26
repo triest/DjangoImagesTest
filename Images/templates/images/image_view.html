@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_layout.html' %}
+{% block content %}
+    <div class="article">
 
-            <div class="article">
+        <H2>{{ image.title }}</H2>
+        <img src="{{ image.image.url }}" height="50px">
+        <p><a href="{% url 'images:list' %}">Назад</a></p>
 
-                <H2>{{image.title}}</H2>
-            <H2>{{image.image}}</H2>
-            <img src="{{ image.image.url }}">
+      <form action="{% url 'images:detail'  pk=image.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Save Comment">
+    </form>
+        {% for data in image.comment_set.all %}
+            {{ data.title }}
+        {% endfor %}
+    </div>
 
-            </div>
-
-</body>
-</html>
+{% endblock %}
