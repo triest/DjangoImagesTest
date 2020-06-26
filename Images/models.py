@@ -7,9 +7,7 @@ from django.conf import settings
 class Image(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=30);
-    image = models.TextField();
     date = models.DateTimeField(auto_now_add=True);
-
-
+    image = models.ImageField(default='default.png', blank=True)
     def __str__(self):
         return self.title;
