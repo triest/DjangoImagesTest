@@ -26,4 +26,6 @@ class CommentsTestCase(TestCase):
         self.assertEquals(self.comment.title, "Test title")
         self.assertEquals(self.comment.image, self.image)
 
-
+    def test_delete_comment(self):
+        self.comment.delete();
+        self.assertTrue(self.comment is not None)
