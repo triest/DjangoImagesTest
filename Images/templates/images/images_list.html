@@ -1,13 +1,35 @@
 {% extends 'base_layout.html' %}
 {% block content %}
 
+    <p><a class="btn btn-primary" href="{% url 'images:create' %}">Создать</a></p>
+    <div class="articles">
+        {% for image in images %}
+            <div class="article">
+                <div class="colMS">
+                    <div class="col-sm-7 col-xs-7 col-md-7 col-lg-7">
+                        <h2 class="card-title">{{ image.title }}</h2>
+                        <img src="{{ image.image.url }}" height="250px">
+                        <small><a href="{% url 'images:detail' pk=image.id %}">Коментарии</a></small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
 
 
-    {% for image in images %}
-        <div class="card">
-            <h2 class="card-title">{{ image.title }}</h2>
-            <img src="{{ image.image.url }}" height="250px">
-            <small><a href="{% url 'images:detail' pk=image.id %}">Коментарии</a></small>
+        <div class="pagination">
+    <span class="step-links">
+        {% if images.has_previous %}
+            <a href="?page={{ images.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ images.number }} of {{ images.paginator.num_pages }}.
+        </span>
+
+        {% if images.has_next %}
+            <a href="?page={{ images.next_page_number }}">next</a>
+        {% endif %}
+    </span>
         </div>
-    {% endfor %}
+    </div>
 {% endblock %}
