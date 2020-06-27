@@ -14,9 +14,86 @@
         {% for data in image.comment_set.all %}
             <div class="group">
                 {{ data.title }}
-                <form action="{% url 'images:comment_delete' pk=data.id %}"> <input type="submit" value="Delete"> </form>
+                <button onclick="openEditWindow('{{ data.id }}','{{ image.id }}','{{ data.title }}');">Edit</button>
+                <form action="{% url 'images:comment_delete' pk=data.id image_pk=image.id %}"
+                      method="post">{% csrf_token %} <input type="submit" value="Delete"></form>
             </div>
         {% endfor %}
     </div>
 
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Редактироваь комментарий</h2>
+            </div>
+            <div class="modal-body">
+                <p>Комментарий</p>
+                <form action="{% url 'images:comment_edit'  pk=12345 comment_pk=678 %}" id="editForm" method="post">
+                    {% csrf_token %} <input type="submit" value="Edit">
+                    <textarea id="title2" name="title2"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <h3>Modal Footer</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function openEditWindow(id, image_id, text) {
+            comment_id = id
+            console.log("image_id"+image_id)
+            console.log("comment_id " + id)
+            var btn2 = document.getElementById("myBtn");
+            var url_mask = "/images/comment/edit/12345/678".replace(/12345/, id);
+            var url_mask = "/images/comment/edit/"+id+"/678".replace(/678/, image_id);
+            console.log("text " + text);
+            console.log("url_mask " + url_mask);
+            var textArea = document.getElementById("title2").value = text;
+
+            //now change action for,
+            var frm = document.getElementById('editForm') || null;
+            frm.action = url_mask;
+            /*
+            * now set comment text value
+            * */
+            modal.style.display = "block";
+        }
+
+        var comment_id = null;
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            console.log("show");
+            var url_mask = "{% url 'images:comment_edit' pk=123465 comment_pk=951 %}".replace(/12345/, id.toString());
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+
+    </script>
 {% endblock %}

@@ -46,11 +46,21 @@ def DetailView(request, pk):
 
     return render(request, 'images/image_view.html', {'image': image, 'comments': comments, 'form': form})
 
-def CommentDelete(request,pk):
+
+def CommentDelete(request, pk, image_pk):
     try:
-        comment=Comment.objects.get(id=pk)
+        comment = Comment.objects.get(id=pk)
     except Comment.DoesNotExist:
         raise Http404
     comment.delete()
 
-    return DetailView(request,pk)
+    return DetailView(request, image_pk)
+
+
+def CommentEdit(request, pk,comment_pk):
+    comment = Comment.objects.get(id=comment_pk)
+    #form = RegisterForm(request.POST)  # if no files
+    comment.title =request.POST.get("title2", "")
+    comment.save()
+
+    return DetailView(request, pk)
