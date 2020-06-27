@@ -4,19 +4,31 @@
 
         <H2>{{ image.title }}</H2>
         <img src="{{ image.image.url }}" height="50px">
-        <p><a href="{% url 'images:list' %}">Назад</a></p>
-
-        <form action="{% url 'images:detail'  pk=image.id %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Save Comment">
-        </form>
+        <p><a class="btn btn-primary" href="{% url 'images:list' %}">Назад</a></p>
+        <div class="card-body">
+            <form action="{% url 'images:detail'  pk=image.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>
+                    {{ form }}
+                </table>
+                <input type="submit" class="btn btn-primary" value="Save Comment">
+            </form>
+        </div>
         {% for data in image.comment_set.all %}
-            <div class="group">
-                {{ data.title }}
-                <button onclick="openEditWindow('{{ data.id }}','{{ image.id }}','{{ data.title }}');">Edit</button>
-                <form action="{% url 'images:comment_delete' pk=data.id image_pk=image.id %}"
-                      method="post">{% csrf_token %} <input type="submit" value="Delete"></form>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <small>{{ data.date }}</small>
+                    <p>
+                        {{ data.title }}
+                    </p>
+                    <form action="{% url 'images:comment_delete' pk=data.id image_pk=image.id %}"
+                          method="post">{% csrf_token %}
+                        <button class="btn btn-primary"
+                                onclick="openEditWindow('{{ data.id }}','{{ image.id }}','{{ data.title }}');">Edit
+                        </button>
+                        <input type="submit" class="btn btn-success" value="Delete">
+                    </form>
+                </div>
             </div>
         {% endfor %}
     </div>
@@ -47,11 +59,11 @@
     <script>
         function openEditWindow(id, image_id, text) {
             comment_id = id
-            console.log("image_id"+image_id)
+            console.log("image_id" + image_id)
             console.log("comment_id " + id)
             var btn2 = document.getElementById("myBtn");
             var url_mask = "/images/comment/edit/12345/678".replace(/12345/, id);
-            var url_mask = "/images/comment/edit/"+id+"/678".replace(/678/, image_id);
+            var url_mask = "/images/comment/edit/" + id + "/678".replace(/678/, image_id);
             console.log("text " + text);
             console.log("url_mask " + url_mask);
             var textArea = document.getElementById("title2").value = text;

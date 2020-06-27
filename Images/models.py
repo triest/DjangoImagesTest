@@ -17,3 +17,4 @@ class Comment(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.TextField(max_length=500);
     image=models.ForeignKey(Image, on_delete=models.CASCADE,blank=True,null=True)
+    date = models.DateTimeField(auto_now_add=True);

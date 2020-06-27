@@ -1,10 +1,12 @@
 {% extends 'base_layout.html' %}
 {% block content %}
+
+
+
     {% for image in images %}
-        <div class="article">
-            <H2>{{ image.title }}</H2>
-            <H2>{{ image.image }}</H2>
-            <img src="{{ image.image.url }}">
+        <div class="card">
+            <h2 class="card-title">{{ image.title }}</h2>
+            <img src="{{ image.image.url }}" height="250px">
             <small><a href="{% url 'images:detail' pk=image.id %}">Коментарии</a></small>
         </div>
     {% endfor %}
