@@ -11,3 +11,9 @@ class Image(models.Model):
     image = models.ImageField(default='default.png', blank=True)
     def __str__(self):
         return self.title;
+
+
+class Comment(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.TextField(max_length=500);
+    image=models.ForeignKey(Image, on_delete=models.CASCADE,blank=True,null=True)

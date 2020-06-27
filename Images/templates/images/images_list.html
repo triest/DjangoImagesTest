@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_layout.html' %}
+{% block content %}
     {% for image in images %}
-            <div class="article">
-
-                <H2>{{image.title}}</H2>
-            <H2>{{image.image}}</H2>
+        <div class="article">
+            <H2>{{ image.title }}</H2>
+            <H2>{{ image.image }}</H2>
             <img src="{{ image.image.url }}">
             <small><a href="{% url 'images:detail' pk=image.id %}">Коментарии</a></small>
-            </div>
-        {% endfor %}
-</body>
-</html>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -16,6 +16,8 @@ urlpatterns = [
     path('create',views.ImageCreate,name="create"),
     path('create',views.ImageCreate,name="create"),
     path('<pk>',views.DetailView,name="detail"),
+    path('comment/create',views.DetailView,name="detail"),
+    path('comment/delete/<pk>',views.CommentDelete,name="comment_delete"),
 
 ]
 

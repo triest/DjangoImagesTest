@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
- <div class="create-article">
+{% extends 'base_layout.html' %}
+{% block content %}
+    <div class="create-article">
         <h2>Create Image</h2>
     </div>
-    <form  action="{% url 'images:create'%}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'images:create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form}}
+        {{ form }}
         <input type="submit" value="Save Image">
     </form>
-  <p><a href="{% url 'images:list' %}">Back</a> </p>
-</body>
-</html>
+    <p><a href="{% url 'images:list' %}">Back</a></p>
+{% endblock %}

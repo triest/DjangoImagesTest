@@ -6,13 +6,16 @@
         <img src="{{ image.image.url }}" height="50px">
         <p><a href="{% url 'images:list' %}">Назад</a></p>
 
-      <form action="{% url 'images:detail'  pk=image.id %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Save Comment">
-    </form>
+        <form action="{% url 'images:detail'  pk=image.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Save Comment">
+        </form>
         {% for data in image.comment_set.all %}
-            {{ data.title }}
+            <div class="group">
+                {{ data.title }}
+                <form action="{% url 'images:comment_delete' pk=data.id %}"> <input type="submit" value="Delete"> </form>
+            </div>
         {% endfor %}
     </div>
 
