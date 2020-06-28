@@ -1,12 +1,20 @@
 {% extends 'base_layout.html' %}
+
+{% block title %}
+     <title>Загрузить изображение</title>
+{% endblock %}
+
 {% block content %}
-    <div class="create-article">
-        <h2>Create Image</h2>
+
+    <div class="fieldWrapper">
+        <form action="{% url 'images:create' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table border="0">
+                {{ form }}
+            </table>
+            <input class="btn bk-bs-btn-primary" type="submit" value="Загрузить изображение">
+        </form>
+        <a class="btn bk-bs-btn-success" href="{% url 'images:list' %}">Назад</a>
     </div>
-    <form action="{% url 'images:create' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Save Image">
-    </form>
-    <p><a href="{% url 'images:list' %}">Back</a></p>
+
 {% endblock %}

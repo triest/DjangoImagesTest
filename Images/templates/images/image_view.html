@@ -3,12 +3,12 @@
     <div class="article">
 
         <H2>{{ image.title }}</H2>
-        <img src="{{ image.image.url }}" height="50px">
-        <p><a class="btn btn-primary" href="{% url 'images:list' %}">Назад</a></p>
+        <img src="{{ image.image.url }}" height="250px">
+        <p><a class="btn btn-primary" href="{% url 'images:list' %}">Back</a></p>
         <div class="card-body">
             <form action="{% url 'images:detail'  pk=image.id %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <table>
+                <table border="0">
                     {{ form }}
                 </table>
                 <input type="submit" class="btn btn-primary" value="Save Comment">

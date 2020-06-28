@@ -1,7 +1,12 @@
 {% extends 'base_layout.html' %}
+
+{% block title %}
+     <title>Список изображений</title>
+{% endblock %}
+
 {% block content %}
 
-    <p><a class="btn btn-primary" href="{% url 'images:create' %}">Создать</a></p>
+    <p><a class="btn btn-primary" href="{% url 'images:create' %}">Загрузить</a></p>
     <div class="articles">
         {% for image in images %}
             <div class="article">
@@ -19,15 +24,15 @@
         <div class="pagination">
     <span class="step-links">
         {% if images.has_previous %}
-            <a href="?page={{ images.previous_page_number }}">previous</a>
+            <a href="?page={{ images.previous_page_number }}">Назад</a>
         {% endif %}
 
         <span class="current">
-            Page {{ images.number }} of {{ images.paginator.num_pages }}.
+            Страница {{ images.number }} из {{ images.paginator.num_pages }}
         </span>
 
         {% if images.has_next %}
-            <a href="?page={{ images.next_page_number }}">next</a>
+            <a href="?page={{ images.next_page_number }}">Вперед</a>
         {% endif %}
     </span>
         </div>
